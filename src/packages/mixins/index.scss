@@ -1,0 +1,19 @@
+@import "config.scss";
+
+/* ------------ 命名空间 -------------- */
+@mixin namespace($block) {
+  $B: $namespace+'-'+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+// 可选样式
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<script>
+  import { createEventDispatcher } from 'svelte'
+  export let type = 'default'
+  export let underline = true
+  export let disabled = false
+  export let href = ''
+  export let icon = ''
+  export let target = '_self'
+
+  const dispatch = createEventDispatcher()
+  function handleClick(event) {
+    if (disabled || href) {
+      return
+    }
+    dispatch('click', event)
+  }
+</script>
+
+<a 
+  class="mz-link mz-link--{type}" 
+  class:is-disabled={disabled} 
+  class:is-underline={underline && !disabled} 
+  href={disabled ? null : href ? href : null} 
+  target={target}
+  on:click={handleClick}
+>
+  {#if icon}<i class={icon} />{/if}
+  {#if $$slots.default}
+    <span class="mz-link--inner">
+      <slot />
+    </span>
+  {/if}
+  {#if $$slots.icon}
+    <slot name="icon" />
+  {/if}
+</a>
+
+<style lang="scss">
+  @import './index.scss';
+</style>
