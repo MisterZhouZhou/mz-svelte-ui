@@ -29,9 +29,9 @@
   }
 
   onMount(() => {
+    window.location.hash = '#/overview'
     const route = window.location.hash.slice(2)
     if (route) {
-      // let routerObj = null;
       routes.map(v => {
         if (v.key && v.key === route) {
           routerObj = v
